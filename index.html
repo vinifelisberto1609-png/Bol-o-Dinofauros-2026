@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bolão Família 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --verde-escuro: #042f1a;
+  --verde:        #0a6e43;
+  --verde-claro:  #10b36a;
+  --verde-neon:   #00e87a;
+  --dourado:      #f5b700;
+  --dourado-claro:#ffe566;
+  --fundo:        #f0f4f2;
+  --branco:       #ffffff;
+  --texto:        #0f1f17;
+  --texto-claro:  #6b7d74;
+  --borda:        #dce7e2;
+  --vermelho:     #e03140;
+  --azul:         #1e6ef5;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+body{
+  font-family:'Inter', sans-serif;
+  background:var(--fundo);
+  color:var(--texto);
+  min-height:100vh;
+}
+
+h1, h2, h3, .display{ font-family:'Syne', sans-serif; }
+
+/* ── TELA DE LOGIN ── */
+#loginBox{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:24px;
+  background:linear-gradient(160deg, var(--verde-escuro) 0%, #063d25 50%, #0a5e38 100%);
+  position:relative;
+  overflow:hidden;
+}
+
+#loginBox::before{
+  content:'';
+  position:absolute;
+  width:600px; height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(0,232,122,.12) 0%, transparent 70%);
+  top:-150px; right:-150px;
+  pointer-events:none;
+}
+
+#loginBox::after{
+  content:'';
+  position:absolute;
+  width:400px; height:400px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(245,183,0,.08) 0%, transparent 70%);
+  bottom:-100px; left:-100px;
+  pointer-events:none;
+}
+
+.login-inner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  width:100%;
+  max-width:320px;
+}
+
+.login-logo{
+  font-size:52px;
+  line-height:1;
+  margin-bottom:4px;
+  animation: pulse-logo 2s ease-in-out infinite;
+}
+
+@keyframes pulse-logo{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.08); }
+}
+
+.login-title{
+  color:white;
+  font-size:26px;
+  letter-spacing:-.5px;
+  text-align:center;
+  line-height:1.2;
+}
+
+.login-title span{ color:var(--dourado); }
+
+.login-sub{
+  color:rgba(255,255,255,.5);
+  font-size:13px;
+  text-align:center;
+  margin-top:-4px;
+  margin-bottom:8px;
+}
+
+.login-inner input{
+  width:100%;
+  padding:14px 16px;
+  border:1.5px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  background:rgba(255,255,255,.08);
+  color:white;
+  font-size:15px;
+  transition:border-color .2s, background .2s;
+  font-family:'Inter', sans-serif;
+}
+
+.login-inner input::placeholder{ color:rgba(255,255,255,.4); }
+.login-inner input:focus{
+  outline:none;
+  border-color:var(--verde-neon);
+  background:rgba(255,255,255,.12);
+}
+
+#entrar{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(135deg, var(--dourado), var(--dourado-claro));
+  color:var(--verde-escuro);
+  border:none;
+  border-radius:12px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:'Inter', sans-serif;
+  transition:transform .15s, box-shadow .15s;
+  box-shadow:0 4px 20px rgba(245,183,0,.35);
+}
+
+#entrar:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(245,183,0,.5); }
+
+#criarConta{
+  width:100%;
+  padding:14px;
+  background:transparent;
+  color:rgba(255,255,255,.8);
+  border:1.5px solid rgba(255,255,255,.25);
+  border-radius:12px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:'Inter', sans-serif;
+  transition:border-color .15s, color .15s;
+}
+
+#criarConta:hover{ border-color:rgba(255,255,255,.5); color:white; }
+
+/* ── APP ── */
+#app{ display:none; }
+
+/* ── TOPO ── */
+.topo{
+  background:
+linear-gradient(
+135deg,
+#006847,
+#009739,
+#f7c600
+);
+  color:white;
+  padding:22px 20px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:3px solid var(--dourado);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.topo-left h1{
+  font-size:20px;
+  letter-spacing:-.3px;
+}
+
+.topo-left p{
+  font-size:12px;
+  opacity:.7;
+  margin-top:2px;
+}
+
+.topo-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+#btnSyncAPI{
+  background:rgba(0,232,122,.2);
+  color:var(--verde-neon);
+  border:1px solid rgba(0,232,122,.35);
+  padding:8px 14px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  display:none;
+  font-family:'Inter', sans-serif;
+  transition:background .2s;
+}
+
+#btnSyncAPI:hover{ background:rgba(0,232,122,.35); }
+#btnSyncAPI.loading{ opacity:.6; cursor:not-allowed; }
+
+#sair{
+  background:rgba(255,255,255,.15);
+  color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+  font-family:'Inter', sans-serif;
+  transition:background .2s;
+}
+#sair:hover{ background:rgba(255,255,255,.25); }
+
+/* ── MENU ── */
+.menu{
+  display:flex;
+  justify-content:space-around;
+  background:white;
+  padding:6px 8px;
+  position:sticky;
+  top:67px;
+  z-index:99;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  border-bottom:1px solid var(--borda);
+}
+
+.menu button{
+  flex:1;
+  border:none;
+  padding:10px 8px;
+  border-radius:24px;
+  background:transparent;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  color:var(--texto-claro);
+  transition:background .15s, color .15s;
+  font-family:'Inter', sans-serif;
+}
+
+.menu button.ativo{
+  background:var(--verde);
+  color:white;
+}
+
+/* ── SEÇÕES ── */
+section{
+  padding:16px 14px;
+  max-width:720px;
+  margin:auto;
+}
+
+section > h2{
+  font-size:18px;
+  margin:6px 0 16px;
+  color:var(--verde-escuro);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* ── FILTROS ── */
+.filtros{
+  display:flex;
+  gap:6px;
+  margin-bottom:16px;
+  overflow-x:auto;
+  padding-bottom:2px;
+  -webkit-overflow-scrolling:touch;
+}
+
+.filtros button{
+  flex-shrink:0;
+  padding:8px 16px;
+  border:1.5px solid var(--borda);
+  border-radius:24px;
+  background:white;
+  color:var(--texto-claro);
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  font-family:'Inter', sans-serif;
+  transition:all .15s;
+  white-space:nowrap;
+}
+
+.filtros button.ativo{
+  background:var(--verde);
+  color:white;
+  border-color:var(--verde);
+}
+
+/* ── CARD DE JOGO ── */
+.jogo-card{
+  background:var(--branco);
+  border-radius:20px;
+  border:1px solid var(--borda);
+  margin-bottom:16px;
+  overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+  transition:transform .15s ease, box-shadow .15s ease;
+  background:#fff;
+border-radius:24px;
+padding:20px;
+box-shadow:0 8px 24px rgba(0,0,0,.08);
+transition:.25s;
+}
+
+.jogo-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,.09);
+}
+
+/* Cabeçalho do card com data */
+.jogo-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 16px;
+  background:var(--fundo);
+  border-bottom:1px solid var(--borda);
+  font-size:12px;
+  color:var(--texto-claro);
+  font-weight:500;
+}
+
+.jogo-status{
+  font-size:11px;
+  font-weight:700;
+  padding:3px 10px;
+  border-radius:20px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.jogo-status.encerrado{
+  background:#e6f9f0;
+  color:#0a6e43;
+}
+
+.jogo-status.ao-vivo{
+  background:#fff0f0;
+  color:#e03140;
+  animation:blink 1.2s ease-in-out infinite;
+}
+
+.jogo-status.aguardando{
+  background:#f0f4f2;
+  color:var(--texto-claro);
+}
+
+@keyframes blink{
+  0%,100%{ opacity:1; }
+  50%{ opacity:.5; }
+}
+
+/* Placar principal */
+.jogo-placar{
+  padding:20px 16px 12px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:12px;
+}
+
+.time-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.time-bandeira{
+  font-size:36px;
+  line-height:1;
+  .time-bandeira{
+  width:60px;
+  height:42px;
+  border-radius:10px;
+  overflow:hidden;
+  margin:0 auto 8px;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.time-bandeira img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+}
+
+.time-nome{
+  font-size:13px;
+  font-weight:700;
+  text-align:center;
+  color:var(--texto);
+  line-height:1.2;
+}
+
+.placar-centro{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+
+.placar-numeros{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.placar-gol{
+  font-size:64px;
+  font-weight:900;
+  color:#111827;
+  line-height:1;
+}
+
+.placar-sep{
+  font-size:24px;
+  font-weight:700;
+  color:var(--texto-claro);
+}
+
+.placar-resultado-texto{
+  font-size:11px;
+  font-weight:600;
+  color:var(--verde);
+  text-transform:uppercase;
+  letter-spacing:.5px;
+
+  
+}
+
+/* Inputs de palpite embutidos */
+.palpite-inputs{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:10px;
+  padding:0 16px 16px;
+}
+
+.palpite-perfeito{
+  border:3px solid #16a34a;
+  background:#f0fdf4;
+  animation:brilhoAcerto 2s infinite;
+}
+
+.palpite-acerto{
+  border:3px solid #22c55e;
+  background:#f0fdf4;
+}
+
+.palpite-quase{
+  border:3px solid #eab308;
+  background:#fefce8;
+}
+
+.palpite-erro{
+  border:3px solid #dc2626;
+  background:#fef2f2;
+}
+
+@keyframes brilhoAcerto{
+  0%{
+    box-shadow:0 0 0 rgba(34,197,94,0);
+  }
+  50%{
+    box-shadow:0 0 20px rgba(34,197,94,.45);
+  }
+  100%{
+    box-shadow:0 0 0 rgba(34,197,94,0);
+  }
+}
+
+.palpite-inputs input[type="number"]{
+  width:75px;
+  height:75px;
+  font-size:32px;
+  font-weight:900;
+  border-radius:16px;
+  border:2px solid #e5e7eb;
+  text-align:center;
+  transition:.2s;
+}
+
+.palpite-inputs input[type="number"]:focus{
+  border-color:#16a34a;
+  transform:scale(1.05);
+}
+
+.palpite-inputs input:focus{
+  outline:none;
+  border-color:var(--verde);
+  background:white;
+}
+
+.palpite-inputs input:disabled{
+  background:#f5f5f5;
+  color:#aaa;
+  cursor:not-allowed;
+}
+
+.palpite-x{
+  font-weight:700;
+  color:var(--texto-claro);
+  font-size:16px;
+  text-align:center;
+}
+
+.palpite-label{
+  text-align:center;
+  font-size:11px;
+  color:var(--texto-claro);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  padding:0 16px 6px;
+}
+
+.palpite-bloqueado{
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
+  color:var(--vermelho);
+  padding:4px 16px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+
+/* ── PALPITES DA GALERA ── */
+.palpites-galera{
+  border-top:1px solid var(--borda);
+  padding:14px 16px;
+  background:#fafcfb;
+}
+
+.palpites-galera-titulo{
+  font-size:12px;
+  font-weight:700;
+  color:var(--texto-claro);
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.palpites-lista{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.palpite-chip{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:white;
+  border:1px solid var(--borda);
+  border-radius:20px;
+  padding:5px 12px;
+  font-size:12px;
+}
+
+.palpite-chip .chip-nome{
+  font-weight:600;
+  color:var(--texto);
+}
+
+.palpite-chip .chip-placar{
+  font-weight:700;
+  color:var(--verde);
+  font-family:'Syne', sans-serif;
+}
+
+.palpite-chip.acertou{
+  background:#e6f9f0;
+  border-color:#a3e9c8;
+}
+
+.palpite-chip.acertou .chip-placar{
+  color:var(--verde);
+}
+
+.palpite-chip .chip-check{
+  color:var(--verde);
+  font-size:13px;
+}
+
+.sem-palpites{
+  font-size:12px;
+  color:var(--texto-claro);
+  font-style:italic;
+}
+
+/* ── BOTÃO SALVAR ── */
+.btn-salvar{
+  display:block;
+  width:100%;
+  margin:4px 0 24px;
+  padding:16px;
+  background:linear-gradient(135deg, var(--verde), var(--verde-claro));
+  color:white;
+  border:none;
+  border-radius:14px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:'Syne', sans-serif;
+  transition:transform .15s, box-shadow .15s;
+  box-shadow:0 4px 16px rgba(10,135,84,.25);
+  letter-spacing:.2px;
+}
+
+.btn-salvar:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(10,135,84,.35);
+}
+
+/* ── RANKING ── */
+.ranking-table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 4px 14px rgba(0,0,0,.06);
+}
+
+.ranking-table th{
+  padding:14px 16px;
+  text-align:left;
+  background:var(--verde-escuro);
+  color:white;
+  font-family:'Syne', sans-serif;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
+.ranking-table th:last-child{ text-align:right; }
+
+.ranking-table td{
+  padding:14px 16px;
+  border-bottom:1px solid var(--borda);
+  font-size:14px;
+}
+
+.ranking-table td:last-child{ text-align:right; font-weight:700; }
+
+.ranking-table tr:last-child td{ border-bottom:none; }
+
+.rank-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:28px; height:28px;
+  border-radius:50%;
+  font-weight:700;
+  font-size:13px;
+}
+
+.rank-1{ background:linear-gradient(135deg,#f5b700,#ffe566); color:#063d25; }
+.rank-2{ background:linear-gradient(135deg,#c0c0c0,#e8e8e8); color:#333; }
+.rank-3{ background:linear-gradient(135deg,#cd7f32,#e8a86a); color:white; }
+.rank-n{ background:var(--fundo); color:var(--texto-claro); }
+
+.ranking-table tr.primeiro{ background:linear-gradient(90deg,#fffde6,#fffac8); }
+.ranking-table tr.segundo{ background:#f8f9fa; }
+.ranking-table tr.terceiro{ background:linear-gradient(90deg,#fff5ee,#ffe9d6); }
+
+.pontos-badge{
+  background:var(--verde);
+  color:white;
+  border-radius:20px;
+  padding:3px 12px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.status-live{
+  background:#dc2626;
+  color:white;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  animation:pulseLive 1.2s infinite;
+}
+
+@keyframes pulseLive{
+  0%{
+    transform:scale(1);
+    opacity:1;
+  }
+  50%{
+    transform:scale(1.08);
+    opacity:.8;
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+/* ── ADMIN ── */
+.admin-section-title{
+  font-size:14px;
+  font-weight:700;
+  color:var(--texto-claro);
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin:20px 0 10px;
+}
+
+.admin-form{
+  background:white;
+  border-radius:16px;
+  border:1px solid var(--borda);
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.admin-form input, .admin-form select{
+  display:block;
+  width:100%;
+  padding:12px 14px;
+  margin-bottom:10px;
+  border:1.5px solid var(--borda);
+  border-radius:10px;
+  font-size:14px;
+  font-family:'Inter', sans-serif;
+  transition:border-color .15s;
+  color:var(--texto);
+}
+
+.admin-form input:focus, .admin-form select:focus{
+  outline:none;
+  border-color:var(--verde);
+}
+
+.admin-form button{
+  width:100%;
+  padding:13px;
+  background:var(--verde);
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+  font-family:'Inter', sans-serif;
+  transition:background .15s;
+}
+
+.admin-form button:hover{ background:var(--verde-escuro); }
+
+.card-admin{
+  background:white;
+  border-radius:16px;
+  border:1px solid var(--borda);
+  padding:16px;
+  margin-bottom:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.card-admin h3{
+  font-size:15px;
+  margin-bottom:6px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.card-admin .data-admin{
+  font-size:12px;
+  color:var(--texto-claro);
+  margin-bottom:12px;
+}
+
+.card-admin .placar-admin{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.card-admin .placar-admin input{
+  width:70px;
+  padding:10px;
+  text-align:center;
+  border:2px solid var(--borda);
+  border-radius:10px;
+  font-size:18px;
+  font-weight:700;
+  font-family:'Syne', sans-serif;
+}
+
+.card-admin .placar-admin input:focus{
+  outline:none;
+  border-color:var(--verde);
+}
+
+.card-admin label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  margin-bottom:12px;
+  cursor:pointer;
+}
+
+.card-admin label input[type="checkbox"]{
+  width:18px; height:18px;
+  cursor:pointer;
+  accent-color:var(--verde);
+}
+
+.card-admin .btn-admin-salvar{
+  width:100%;
+  padding:12px;
+  background:var(--verde-escuro);
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+  font-family:'Inter', sans-serif;
+  transition:background .15s;
+}
+
+.card-admin .btn-admin-salvar:hover{ background:var(--verde); }
+
+/* API Sync card */
+.api-sync-card{
+  background:linear-gradient(135deg, var(--verde-escuro), #063d25);
+  border-radius:16px;
+  padding:20px;
+  color:white;
+  margin-bottom:20px;
+}
+
+.api-sync-card h3{
+  font-size:16px;
+  margin-bottom:8px;
+  color:var(--dourado);
+}
+
+.api-sync-card p{
+  font-size:13px;
+  opacity:.8;
+  margin-bottom:14px;
+  line-height:1.5;
+}
+
+.api-sync-card input{
+  width:100%;
+  padding:12px 14px;
+  margin-bottom:10px;
+  border:1.5px solid rgba(255,255,255,.2);
+  border-radius:10px;
+  background:rgba(255,255,255,.1);
+  color:white;
+  font-size:14px;
+  font-family:'Inter', sans-serif;
+}
+
+.api-sync-card input::placeholder{ color:rgba(255,255,255,.4); }
+.api-sync-card input:focus{ outline:none; border-color:var(--verde-neon); }
+
+.api-sync-card .btn-sync{
+  width:100%;
+  padding:13px;
+  background:linear-gradient(135deg, var(--dourado), var(--dourado-claro));
+  color:var(--verde-escuro);
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+  font-family:'Inter', sans-serif;
+  transition:transform .15s, opacity .15s;
+}
+
+.api-sync-card .btn-sync:hover{ transform:translateY(-1px); }
+.api-sync-card .btn-sync:disabled{ opacity:.5; cursor:not-allowed; }
+
+.sync-log{
+  margin-top:12px;
+  max-height:160px;
+  overflow-y:auto;
+  border-radius:8px;
+  background:rgba(0,0,0,.25);
+  padding:10px 12px;
+  font-size:12px;
+  font-family:'Courier New', monospace;
+  color:var(--verde-neon);
+  line-height:1.6;
+}
+
+.sync-log .log-ok{ color:#00e87a; }
+.sync-log .log-warn{ color:#f5b700; }
+.sync-log .log-err{ color:#ff6b7a; }
+.sync-log .log-info{ color:rgba(255,255,255,.6); }
+
+/* ── UTILITÁRIOS ── */
+.vs-text{ color:var(--texto-claro); font-weight:400; font-size:11px; text-transform:uppercase; }
+
+.empty-state{
+  text-align:center;
+  padding:48px 20px;
+  color:var(--texto-claro);
+}
+
+.empty-state .empty-icon{ font-size:48px; margin-bottom:12px; }
+.empty-state p{ font-size:14px; }
+
+/* Toast */
+#toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--verde-escuro);
+  color:white;
+  padding:12px 24px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:600;
+  z-index:9999;
+  transition:transform .3s ease;
+  pointer-events:none;
+  white-space:nowrap;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+}
+
+#toast.show{ transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="loginBox">
+  <div class="login-inner">
+    <div class="login-logo">🏆</div>
+    <h1 class="login-title">Bolão <span>Família</span> 2026</h1>
+    <p class="login-sub">Copa do Mundo · EUA, México &amp; Canadá</p>
+
+    <input id="nome" placeholder="Seu nome">
+    <input id="pin" type="password" placeholder="PIN">
+
+    <button id="entrar">Entrar</button>
+    <button id="criarConta">Criar conta</button>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="app">
+
+  <div class="topo">
+    <div class="topo-left">
+      <h1>🏆 Bolão Dinofauros 2026</h1>
+      <p id="usuarioLogado"></p>
+    </div>
+    <div class="topo-right">
+      <button id="btnSyncAPI" onclick="syncAPIFutebol()" title="Sincronizar resultados da API de futebol">⚡ Sync API</button>
+      <button id="sair" onclick="logout()">Sair</button>
+    </div>
+  </div>
+
+  <div class="menu">
+    <button id="menuJogos"   onclick="abrirAba('jogos')">⚽ Jogos</button>
+    <button id="menuRanking" onclick="abrirAba('ranking')">🏆 Ranking</button>
+    <button id="menuAdmin"   onclick="abrirAba('admin')" style="display:none">👑 Admin</button>
+  </div>
+
+  <!-- ── JOGOS / PALPITES ── -->
+  <section id="jogos">
+    <h2>⚽ Palpites</h2>
+
+    <div class="filtros">
+      <button id="filtroTodos"      onclick="filtrarJogos('todos')">Todos</button>
+      <button id="filtroHoje"       class="ativo" onclick="filtrarJogos('hoje')">Hoje</button>
+      <button id="filtroFuturos"    onclick="filtrarJogos('futuros')">Próximos</button>
+      <button id="filtroEncerrados" onclick="filtrarJogos('encerrados')">Encerrados</button>
+    </div>
+
+    <div id="listaJogos">
+      <div class="empty-state"><div class="empty-icon">⏳</div><p>Carregando jogos…</p></div>
+    </div>
+
+    <button class="btn-salvar" onclick="salvarPalpites()">✅ Salvar Palpites</button>
+  </section>
+
+  <!-- ── RANKING ── -->
+  <section id="ranking" style="display:none">
+    <h2>🏆 Classificação</h2>
+    <table class="ranking-table">
+      <thead>
+        <tr>
+          <th style="width:56px">Pos.</th>
+          <th>Participante</th>
+          <th>Pontos</th>
+        </tr>
+      </thead>
+      <tbody id="rankingBody"></tbody>
+    </table>
+  </section>
+
+  <!-- ── ADMIN ── -->
+  <section id="admin" style="display:none">
+    <h2>👑 Administração</h2>
+
+    <!-- Importar Jogos -->
+    <div class="api-sync-card">
+      <h3>📥 Importar Jogos do Mundial</h3>
+      <p>Chama a Edge Function do Supabase que busca todos os jogos da Copa do Mundo na football-data.org e cadastra automaticamente os que ainda não existem (com o api_match_id, necessário para o sync de resultados).</p>
+      <button class="btn-sync" id="btnImportarAdmin" onclick="importarJogosAPI()">📥 Importar Jogos Agora</button>
+      <div id="importLog" class="sync-log" style="display:none"></div>
+    </div>
+
+    <!-- Sync API -->
+    <div class="api-sync-card">
+      <h3>⚡ Sincronizar com Football-Data.org</h3>
+      <p>Chama a Edge Function do Supabase que busca os jogos encerrados na football-data.org e atualiza os resultados automaticamente. O token da API fica seguro no servidor.</p>
+      <button class="btn-sync" id="btnSyncAdmin" onclick="syncAPIFutebol()">⚡ Sincronizar Resultados Agora</button>
+      <div id="syncLog" class="sync-log" style="display:none"></div>
+    </div>
+
+    <div class="admin-section-title">➕ Cadastrar Jogo</div>
+    <div class="admin-form">
+      <input id="mandante" placeholder="Time Mandante (em inglês, ex: Brazil)">
+      <input id="visitante" placeholder="Time Visitante (em inglês, ex: Argentina)">
+      <input id="dataJogo" type="datetime-local">
+      <button onclick="cadastrarJogo()">Cadastrar Jogo</button>
+    </div>
+
+    <div class="admin-section-title">📋 Jogos Cadastrados</div>
+    <div id="listaJogosAdmin"><div class="empty-state"><p>Carregando…</p></div></div>
+  </section>
+
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* ─────────────────────────────────────────
+   CONFIGURAÇÃO DO SUPABASE
+───────────────────────────────────────── */
+const supabaseUrl = "https://agyqhoqngtcowowjrjlj.supabase.co";
+const supabaseKey = "sb_publishable_r_TbuXw-DCz6DREoRsqAHQ_OwSs0jpM";
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+
+/* ─────────────────────────────────────────
+   TOAST
+───────────────────────────────────────── */
+function toast(msg, dur = 2800){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._tid);
+  t._tid = setTimeout(() => t.classList.remove("show"), dur);
+}
+
+
+/* ─────────────────────────────────────────
+   TIMES + BANDEIRAS
+───────────────────────────────────────── */
+const mapaTimes = {
+  "Brazil":{"pt":"Brasil","cod":"BR"},
+  "Argentina":{"pt":"Argentina","cod":"AR"},
+  "France":{"pt":"França","cod":"FR"},
+  "Germany":{"pt":"Alemanha","cod":"DE"},
+  "Spain":{"pt":"Espanha","cod":"ES"},
+  "England":{"pt":"Inglaterra","cod":"GB-ENG"},
+  "Portugal":{"pt":"Portugal","cod":"PT"},
+  "Netherlands":{"pt":"Holanda","cod":"NL"},
+  "Belgium":{"pt":"Bélgica","cod":"BE"},
+  "Croatia":{"pt":"Croácia","cod":"HR"},
+  "Morocco":{"pt":"Marrocos","cod":"MA"},
+  "Japan":{"pt":"Japão","cod":"JP"},
+  "South Korea":{"pt":"Coreia do Sul","cod":"KR"},
+  "Korea Republic":{"pt":"Coreia do Sul","cod":"KR"},
+  "Mexico":{"pt":"México","cod":"MX"},
+  "United States":{"pt":"EUA","cod":"US"},
+  "USA":{"pt":"EUA","cod":"US"},
+  "Canada":{"pt":"Canadá","cod":"CA"},
+  "Senegal":{"pt":"Senegal","cod":"SN"},
+  "Ghana":{"pt":"Gana","cod":"GH"},
+  "Cameroon":{"pt":"Camarões","cod":"CM"},
+  "Nigeria":{"pt":"Nigéria","cod":"NG"},
+  "Tunisia":{"pt":"Tunísia","cod":"TN"},
+  "Egypt":{"pt":"Egito","cod":"EG"},
+  "Algeria":{"pt":"Argélia","cod":"DZ"},
+  "Saudi Arabia":{"pt":"Arábia Saudita","cod":"SA"},
+  "Qatar":{"pt":"Catar","cod":"QA"},
+  "Australia":{"pt":"Austrália","cod":"AU"},
+  "Iran":{"pt":"Irã","cod":"IR"},
+  "Uruguay":{"pt":"Uruguai","cod":"UY"},
+  "Colombia":{"pt":"Colômbia","cod":"CO"},
+  "Ecuador":{"pt":"Equador","cod":"EC"},
+  "Chile":{"pt":"Chile","cod":"CL"},
+  "Peru":{"pt":"Peru","cod":"PE"},
+  "Paraguay":{"pt":"Paraguai","cod":"PY"},
+  "Bolivia":{"pt":"Bolívia","cod":"BO"},
+  "Venezuela":{"pt":"Venezuela","cod":"VE"},
+  "Switzerland":{"pt":"Suíça","cod":"CH"},
+  "Poland":{"pt":"Polônia","cod":"PL"},
+  "Serbia":{"pt":"Sérvia","cod":"RS"},
+  "Denmark":{"pt":"Dinamarca","cod":"DK"},
+  "Sweden":{"pt":"Suécia","cod":"SE"},
+  "Norway":{"pt":"Noruega","cod":"NO"},
+  "Wales":{"pt":"País de Gales","cod":"GB-WLS"},
+  "Scotland":{"pt":"Escócia","cod":"GB-SCT"},
+  "Ukraine":{"pt":"Ucrânia","cod":"UA"},
+  "Turkey":{"pt":"Turquia","cod":"TR"},
+  "Czech Republic":{"pt":"República Tcheca","cod":"CZ"},
+  "Austria":{"pt":"Áustria","cod":"AT"},
+  "Hungary":{"pt":"Hungria","cod":"HU"},
+  "Romania":{"pt":"Romênia","cod":"RO"},
+  "Greece":{"pt":"Grécia","cod":"GR"},
+  "Italy":{"pt":"Itália","cod":"IT"},
+  "Russia":{"pt":"Rússia","cod":"RU"},
+  "Ivory Coast":{"pt":"Costa do Marfim","cod":"CI"},
+  "Côte d'Ivoire":{"pt":"Costa do Marfim","cod":"CI"},
+  "Mali":{"pt":"Mali","cod":"ML"},
+  "South Africa":{"pt":"África do Sul","cod":"ZA"},
+  "Jordan":{"pt":"Jordânia","cod":"JO"},
+  "Iraq":{"pt":"Iraque","cod":"IQ"},
+  "China":{"pt":"China","cod":"CN"},
+  "China PR":{"pt":"China","cod":"CN"},
+  "New Zealand":{"pt":"Nova Zelândia","cod":"NZ"},
+  "Panama":{"pt":"Panamá","cod":"PA"},
+  "Costa Rica":{"pt":"Costa Rica","cod":"CR"},
+  "Honduras":{"pt":"Honduras","cod":"HN"},
+  "Jamaica":{"pt":"Jamaica","cod":"JM"},
+  "Curaçao":{"pt":"Curaçao","cod":"CW"},
+  "Curacao":{"pt":"Curaçao","cod":"CW"},
+  "Haiti":{"pt":"Haiti","cod":"HT"},
+  "Trinidad and Tobago":{"pt":"Trinidad e Tobago","cod":"TT"},
+  "Cape Verde":{"pt":"Cabo Verde","cod":"CV"},
+  "Cabo Verde":{"pt":"Cabo Verde","cod":"CV"},
+  "Uzbekistan":{"pt":"Uzbequistão","cod":"UZ"},
+  "Bosnia and Herzegovina":{"pt":"Bósnia e Herzegóvina","cod":"BA"}
+};
+
+function bandeiraEmoji(cod){
+  // Tratamento especial para sub-regiões da GB
+  const especiais = {"GB-ENG":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","GB-SCT":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","GB-WLS":"🏴󠁧󠁢󠁷󠁬󠁳󠁿"};
+  if(especiais[cod]) return especiais[cod];
+  return cod.toUpperCase().replace(/./g, c =>
+    String.fromCodePoint(127397 + c.charCodeAt(0))
+  );
+}
+
+function traduzirTime(nome){
+  const info = mapaTimes[nome];
+
+  if(info){
+    return {
+      nome: info.pt,
+      bandeira: `https://flagcdn.com/w80/${info.cod.toLowerCase()}.png`
+    };
+  }
+
+  return {
+    nome,
+    bandeira: "https://flagcdn.com/w80/un.png"
+  };
+}
+
+
+/* ─────────────────────────────────────────
+   LOGIN / CADASTRO
+───────────────────────────────────────── */
+document.getElementById("entrar").addEventListener("click", async () => {
+  const nome = document.getElementById("nome").value.trim();
+  const pin  = document.getElementById("pin").value.trim();
+  if(!nome || !pin){ toast("⚠️ Preencha nome e PIN"); return; }
+
+  const { data, error } = await supabaseClient
+    .from("participantes").select("*")
+    .eq("nome", nome).eq("pin", pin).single();
+
+  if(error || !data){ toast("❌ Nome ou PIN incorreto"); return; }
+  logarUsuario(data);
+});
+
+document.getElementById("criarConta").addEventListener("click", async () => {
+  const nome = document.getElementById("nome").value.trim();
+  const pin  = document.getElementById("pin").value.trim();
+  if(!nome || !pin){ toast("⚠️ Preencha nome e PIN"); return; }
+
+  const { data: existente } = await supabaseClient
+    .from("participantes").select("*").eq("nome", nome).maybeSingle();
+  if(existente){ toast("⚠️ Esse nome já existe"); return; }
+
+  const { data, error } = await supabaseClient
+    .from("participantes")
+    .insert([{ nome, pin, pontos: 0, admin: false }])
+    .select().single();
+
+  if(error){ toast("❌ Erro ao criar conta: " + error.message); return; }
+  logarUsuario(data);
+});
+
+function logarUsuario(data){
+  localStorage.setItem("participante", JSON.stringify(data));
+  iniciarApp(data);
+}
+
+function logout(){
+  localStorage.removeItem("participante");
+  location.reload();
+}
+
+function iniciarApp(participante){
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("app").style.display = "block";
+  document.getElementById("usuarioLogado").innerText = "Olá, " + participante.nome + " 👋";
+
+  if(participante.admin){
+    document.getElementById("menuAdmin").style.display = "inline-flex";
+    document.getElementById("btnSyncAPI").style.display = "inline-flex";
+  }
+
+  abrirAba("jogos");
+}
+
+(function(){
+  const salvo = localStorage.getItem("participante");
+  if(salvo) iniciarApp(JSON.parse(salvo));
+})();
+
+
+/* ─────────────────────────────────────────
+   NAVEGAÇÃO
+───────────────────────────────────────── */
+function abrirAba(aba){
+  document.querySelectorAll("section").forEach(s => s.style.display = "none");
+  document.getElementById(aba).style.display = "block";
+  document.querySelectorAll(".menu button").forEach(b => b.classList.remove("ativo"));
+  const btn = document.getElementById("menu" + aba.charAt(0).toUpperCase() + aba.slice(1));
+  if(btn) btn.classList.add("ativo");
+  if(aba === "jogos")   carregarJogos();
+  if(aba === "ranking") carregarRanking();
+  if(aba === "admin")   carregarJogosAdmin();
+}
+
+
+/* ─────────────────────────────────────────
+   JOGOS / PALPITES
+───────────────────────────────────────── */
+let cacheJogos = [];
+let cacheParticipantes = [];
+let cachePalpites = [];
+let filtroAtual = "hoje";
+
+async function carregarJogos(){
+  const lista = document.getElementById("listaJogos");
+  lista.innerHTML = '<div class="empty-state"><div class="empty-icon">⏳</div><p>Carregando jogos…</p></div>';
+
+  const [jogosRes, participantesRes, palpitesRes] = await Promise.all([
+    supabaseClient.from("jogos").select("*").order("data_jogo"),
+    supabaseClient.from("participantes").select("id, nome"),
+    supabaseClient.from("palpites").select("*")
+  ]);
+
+  if(jogosRes.error){
+    lista.innerHTML = '<div class="empty-state"><div class="empty-icon">❌</div><p>Erro ao carregar jogos.</p></div>';
+    return;
+  }
+
+  cacheJogos = jogosRes.data || [];
+  cacheParticipantes = participantesRes.data || [];
+  cachePalpites = palpitesRes.data || [];
+  renderJogos();
+}
+
+function filtrarJogos(filtro){
+  filtroAtual = filtro;
+  document.querySelectorAll(".filtros button").forEach(b => b.classList.remove("ativo"));
+  const btn = document.getElementById("filtro" + filtro.charAt(0).toUpperCase() + filtro.slice(1));
+  if(btn) btn.classList.add("ativo");
+  renderJogos();
+}
+
+function mesmoDia(d1, d2){
+  return d1.getFullYear()===d2.getFullYear() &&
+         d1.getMonth()===d2.getMonth() &&
+         d1.getDate()===d2.getDate();
+}
+
+function renderJogos(){
+  const lista = document.getElementById("listaJogos");
+  if(cacheJogos.length === 0){
+    lista.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><p>Nenhum jogo cadastrado ainda.</p></div>';
+    return;
+  }
+
+  const agora = new Date();
+  const participante = JSON.parse(localStorage.getItem("participante"));
+
+  const jogosFiltrados = cacheJogos.filter(jogo => {
+    const inicio = new Date(jogo.data_jogo);
+    if(filtroAtual === "todos") return true;
+    if(filtroAtual === "encerrados") return jogo.encerrado === true;
+    if(filtroAtual === "hoje") return mesmoDia(inicio, agora);
+    if(filtroAtual === "futuros") return inicio > agora && !mesmoDia(inicio, agora);
+    return true;
+  });
+
+  if(jogosFiltrados.length === 0){
+    const msgs = {
+      hoje:"Nenhum jogo hoje.",
+      futuros:"Nenhum jogo futuro cadastrado.",
+      encerrados:"Nenhum jogo encerrado ainda.",
+      todos:"Nenhum jogo cadastrado."
+    };
+    lista.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>${msgs[filtroAtual]||""}</p></div>`;
+    return;
+  }
+
+  lista.innerHTML = jogosFiltrados.map(jogo => {
+    const inicio = new Date(jogo.data_jogo);
+    const bloqueado = agora >= inicio;
+    const mandante  = traduzirTime(jogo.mandante);
+    const visitante = traduzirTime(jogo.visitante);
+
+    // Status
+    let statusHtml;
+    if(jogo.encerrado){
+      statusHtml = '<span class="jogo-status encerrado">✅ Encerrado</span>';
+    } else if(bloqueado){
+      statusHtml = '<span class="jogo-status ao-vivo">🔴 Ao Vivo</span>';
+    } else {
+      statusHtml = '<span class="jogo-status aguardando">🕐 Aguardando</span>';
+    }
+
+    // Placar do jogo (se encerrado)
+    let placarHtml;
+    if(jogo.encerrado && jogo.gols_mandante !== null && jogo.gols_visitante !== null){
+      placarHtml = `
+        <div class="jogo-placar">
+          <div class="time-block">
+            <div class="time-bandeira">
+  <img src="${mandante.bandeira}" alt="${mandante.nome}">
+</div>
+            <div class="time-nome">${mandante.nome}</div>
+          </div>
+          <div class="placar-centro">
+            <div class="placar-numeros">
+              <div class="placar-gol">${jogo.gols_mandante}</div>
+              <div class="placar-sep">×</div>
+              <div class="placar-gol">${jogo.gols_visitante}</div>
+            </div>
+            <div class="placar-resultado-texto">Resultado Final</div>
+          </div>
+          <div class="time-block">
+            <div class="time-bandeira">
+  <img src="${visitante.bandeira}" alt="${visitante.nome}">
+</div>
+            <div class="time-nome">${visitante.nome}</div>
+          </div>
+        </div>`;
+    } else {
+      placarHtml = `
+        <div class="jogo-placar">
+          <div class="time-block">
+<div class="time-bandeira">
+  <img src="${mandante.bandeira}" alt="${mandante.nome}">
+</div>            <div class="time-nome">${mandante.nome}</div>
+          </div>
+          <div class="placar-centro">
+            <div class="placar-numeros">
+              <div class="placar-sep" style="font-size:16px;padding:8px">VS</div>
+            </div>
+          </div>
+          <div class="time-block">
+            <div class="time-bandeira">
+  <img src="${visitante.bandeira}" alt="${visitante.nome}">
+</div>
+            <div class="time-nome">${visitante.nome}</div>
+          </div>
+        </div>`;
+    }
+
+    // Inputs de palpite
+    let palpiteHtml = "";
+    if(!jogo.encerrado){
+      palpiteHtml = `
+        <div class="palpite-label">Seu palpite</div>
+        <div class="palpite-inputs">
+          <input type="number" id="m${jogo.id}" min="0" placeholder="0" ${bloqueado?"disabled":""}>
+          <div class="palpite-x">×</div>
+          <input type="number" id="v${jogo.id}" min="0" placeholder="0" ${bloqueado?"disabled":""}>
+        </div>
+        ${bloqueado ? '<div class="palpite-bloqueado">🔒 Palpite encerrado</div>' : ""}`;
+    }
+
+    // Palpites da galera
+    const meuPalpite = cachePalpites.find(p =>
+      p.jogo_id === jogo.id && p.participante_id === participante.id
+    );
+
+    const chips = cacheParticipantes.map(p => {
+      const pal = cachePalpites.find(pl => pl.jogo_id === jogo.id && pl.participante_id === p.id);
+      if(!pal) return `
+        <div class="palpite-chip">
+          <span class="chip-nome">${p.nome}</span>
+          <span style="color:var(--texto-claro)">—</span>
+        </div>`;
+
+      // Verificar se acertou resultado (se jogo encerrado)
+      let acertou = false;
+      if(jogo.encerrado && jogo.gols_mandante !== null){
+        const rReal = Math.sign(jogo.gols_mandante - jogo.gols_visitante);
+        const rPal  = Math.sign(pal.palpite_mandante - pal.palpite_visitante);
+        acertou = rReal === rPal;
+      }
+
+      return `
+        <div class="palpite-chip ${acertou?"acertou":""}">
+          <span class="chip-nome">${p.nome}</span>
+          <span class="chip-placar">${pal.palpite_mandante}×${pal.palpite_visitante}</span>
+          ${acertou ? '<span class="chip-check">✅</span>' : ""}
+        </div>`;
+    }).join("");
+
+    return `
+    <div class="jogo-card">
+      <div class="jogo-header">
+        <span>🗓️ ${inicio.toLocaleString("pt-BR", {day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</span>
+        ${statusHtml}
+      </div>
+
+      ${placarHtml}
+      ${palpiteHtml}
+
+      <div class="palpites-galera">
+        <div class="palpites-galera-titulo">👥 Palpites da galera</div>
+        <div class="palpites-lista">${chips || '<span class="sem-palpites">Nenhum palpite ainda.</span>'}</div>
+      </div>
+    </div>`;
+  }).join("");
+
+  preencherMeusPalpites();
+}
+
+function preencherMeusPalpites(){
+  const participante = JSON.parse(localStorage.getItem("participante"));
+  cachePalpites
+    .filter(p => p.participante_id === participante.id)
+    .forEach(p => {
+      const m = document.getElementById(`m${p.jogo_id}`);
+      const v = document.getElementById(`v${p.jogo_id}`);
+      if(m) m.value = p.palpite_mandante;
+      if(v) v.value = p.palpite_visitante;
+    });
+}
+
+async function salvarPalpites(){
+  const participante = JSON.parse(localStorage.getItem("participante"));
+  const agora = new Date();
+  let salvos = 0;
+
+  for(const jogo of cacheJogos){
+    const inicio = new Date(jogo.data_jogo);
+    if(agora >= inicio) continue;
+
+    const mInput = document.getElementById(`m${jogo.id}`);
+    const vInput = document.getElementById(`v${jogo.id}`);
+    if(!mInput || !vInput) continue;
+
+    const mandante  = mInput.value;
+    const visitante = vInput.value;
+    if(mandante === "" || visitante === "") continue;
+
+    const { data: existente } = await supabaseClient
+      .from("palpites").select("id")
+      .eq("participante_id", participante.id)
+      .eq("jogo_id", jogo.id);
+
+    if(existente && existente.length > 0){
+      await supabaseClient.from("palpites").update({
+        palpite_mandante: Number(mandante),
+        palpite_visitante: Number(visitante)
+      }).eq("id", existente[0].id);
+    } else {
+      await supabaseClient.from("palpites").insert([{
+        participante_id: participante.id,
+        jogo_id: jogo.id,
+        palpite_mandante: Number(mandante),
+        palpite_visitante: Number(visitante)
+      }]);
+    }
+    salvos++;
+  }
+
+  toast(salvos > 0 ? `✅ ${salvos} palpite(s) salvo(s)!` : "⚠️ Nenhum palpite novo para salvar.");
+  await carregarJogos();
+}
+
+
+/* ─────────────────────────────────────────
+   RANKING
+───────────────────────────────────────── */
+async function atualizarPontuacao(){
+  const { data: participantes } = await supabaseClient.from("participantes").select("*");
+  const { data: jogos } = await supabaseClient.from("jogos").select("*").eq("encerrado", true);
+  const { data: palpites } = await supabaseClient.from("palpites").select("*");
+
+  for(const participante of participantes){
+    let pontos = 0;
+    const palpitesPessoa = palpites.filter(p => p.participante_id === participante.id);
+
+    for(const palpite of palpitesPessoa){
+      const jogo = jogos.find(j => j.id === palpite.jogo_id);
+      if(!jogo) continue;
+      const rReal = Math.sign(jogo.gols_mandante - jogo.gols_visitante);
+      const rPal  = Math.sign(palpite.palpite_mandante - palpite.palpite_visitante);
+      if(rReal === rPal) pontos++;
+    }
+
+    await supabaseClient.from("participantes").update({ pontos }).eq("id", participante.id);
+  }
+}
+
+async function carregarRanking(){
+  await atualizarPontuacao();
+
+  const { data } = await supabaseClient
+    .from("participantes").select("*")
+    .order("pontos", { ascending: false });
+
+  const tbody = document.getElementById("rankingBody");
+  tbody.innerHTML = "";
+
+  const emojis = ["🥇","🥈","🥉"];
+  const classes = ["primeiro","segundo","terceiro"];
+
+  data.forEach((p, i) => {
+    const badgeClass = i < 3 ? `rank-${i+1}` : "rank-n";
+    const trClass = i < 3 ? classes[i] : "";
+    const pos = i < 3 ? emojis[i] : (i+1);
+
+    tbody.innerHTML += `
+    <tr class="${trClass}">
+      <td><span class="rank-badge ${badgeClass}">${pos}</span></td>
+      <td style="font-weight:600">${p.nome}</td>
+      <td><span class="pontos-badge">${p.pontos} pts</span></td>
+    </tr>`;
+  });
+}
+
+
+/* ─────────────────────────────────────────
+   ADMIN — Cadastro manual
+───────────────────────────────────────── */
+async function cadastrarJogo(){
+  const mandante  = document.getElementById("mandante").value.trim();
+  const visitante = document.getElementById("visitante").value.trim();
+  const data_jogo = document.getElementById("dataJogo").value;
+
+  if(!mandante || !visitante || !data_jogo){ toast("⚠️ Preencha todos os campos"); return; }
+
+  const { error } = await supabaseClient.from("jogos").insert([{ mandante, visitante, data_jogo }]);
+  if(error){ toast("❌ Erro: " + error.message); return; }
+
+  document.getElementById("mandante").value = "";
+  document.getElementById("visitante").value = "";
+  document.getElementById("dataJogo").value = "";
+
+  toast("✅ Jogo cadastrado!");
+  carregarJogosAdmin();
+}
+
+async function carregarJogosAdmin(){
+  const { data: jogos, error } = await supabaseClient
+    .from("jogos").select("*").order("data_jogo");
+  const lista = document.getElementById("listaJogosAdmin");
+
+  if(error || !jogos){
+    lista.innerHTML = '<div class="empty-state"><p>Erro ao carregar jogos.</p></div>';
+    return;
+  }
+
+  if(jogos.length === 0){
+    lista.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><p>Nenhum jogo cadastrado ainda.</p></div>';
+    return;
+  }
+
+  lista.innerHTML = jogos.map(jogo => {
+    const mandante  = traduzirTime(jogo.mandante);
+    const visitante = traduzirTime(jogo.visitante);
+    return `
+    <div class="card-admin">
+      <h3>${mandante.bandeira} ${mandante.nome} <span class="vs-text">vs</span> ${visitante.bandeira} ${visitante.nome}</h3>
+      <div class="data-admin">🗓️ ${new Date(jogo.data_jogo).toLocaleString("pt-BR")}</div>
+      <div class="placar-admin">
+        <input type="number" id="gm${jogo.id}" value="${jogo.gols_mandante ?? ""}" placeholder="Man.">
+        <span style="color:var(--texto-claro);font-weight:700">×</span>
+        <input type="number" id="gv${jogo.id}" value="${jogo.gols_visitante ?? ""}" placeholder="Vis.">
+      </div>
+      <label>
+        <input type="checkbox" id="e${jogo.id}" ${jogo.encerrado?"checked":""}>
+        Encerrado
+      </label>
+      <button class="btn-admin-salvar" onclick="salvarResultado(${jogo.id})">💾 Salvar Resultado</button>
+    </div>`;
+  }).join("");
+}
+
+async function salvarResultado(id){
+  const gm = document.getElementById(`gm${id}`).value;
+  const gv = document.getElementById(`gv${id}`).value;
+  const encerrado = document.getElementById(`e${id}`).checked;
+
+  const { error } = await supabaseClient.from("jogos").update({
+    gols_mandante:  gm === "" ? null : Number(gm),
+    gols_visitante: gv === "" ? null : Number(gv),
+    encerrado
+  }).eq("id", id);
+
+  if(error){ toast("❌ Erro: " + error.message); return; }
+  toast("✅ Resultado atualizado!");
+}
+
+
+/* ─────────────────────────────────────────
+   SYNC COM FOOTBALL-DATA.ORG
+
+   Endpoint: GET https://api.football-data.org/v4/competitions/{code}/matches
+   Parâmetro: status=FINISHED
+   Header: X-Auth-Token: SUA_API_TOKEN
+
+   Estrutura do JSON retornado:
+   {
+     matches: [
+       {
+         utcDate: "2026-06-15T18:00:00Z",
+         status: "FINISHED",
+         homeTeam: { name: "Brazil" },
+         awayTeam: { name: "Argentina" },
+         score: {
+           fullTime: { home: 2, away: 1 }
+         }
+       }
+     ]
+   }
+
+   Códigos de competição úteis:
+   WC  → Copa do Mundo FIFA
+   CL  → Champions League
+   PL  → Premier League
+   BL1 → Bundesliga
+   SA  → Serie A
+   PD  → La Liga
+
+   Para usar:
+   1. Cadastre-se em https://www.football-data.org/ (plano free: 10 req/min)
+   2. Obtenha seu token no e-mail de confirmação / dashboard
+   3. Cole o token no campo acima no painel Admin
+   4. Informe o código da competição (ex: WC)
+   5. Clique em "Sincronizar Resultados Agora"
+
+   ATENÇÃO — CORS: a football-data.org bloqueia requisições diretas do
+   navegador (CORS). Se aparecer erro de CORS, use o proxy embutido abaixo
+   (allorigins.win) ou rode o sync via Node.js no servidor.
+───────────────────────────────────────── */
+function addLog(msg, tipo = "info", alvo = "syncLog"){
+  const log = document.getElementById(alvo);
+  if(!log) return;
+  log.style.display = "block";
+  const span = document.createElement("div");
+  span.className = "log-" + tipo;
+  span.textContent = "[" + new Date().toLocaleTimeString("pt-BR") + "] " + msg;
+  log.appendChild(span);
+  log.scrollTop = log.scrollHeight;
+}
+
+async function syncAPIFutebol(){
+  // ── URL da sua Edge Function no Supabase ──────────────────
+  // Formato: https://<ref>.supabase.co/functions/v1/<nome-da-função>
+  const EDGE_FUNCTION_URL = "https://agyqhoqngtcowowjrjlj.supabase.co/functions/v1/sync-resultados";
+
+  // Anon key do Supabase (a mesma usada no supabaseClient acima)
+  const ANON_KEY = supabaseKey;
+
+  const btnAdmin = document.getElementById("btnSyncAdmin");
+  const btnTopo  = document.getElementById("btnSyncAPI");
+  if(btnAdmin){ btnAdmin.disabled = true; btnAdmin.textContent = "⏳ Sincronizando…"; }
+  if(btnTopo){ btnTopo.classList.add("loading"); btnTopo.textContent = "⏳ Sync…"; }
+
+  const logEl = document.getElementById("syncLog");
+  if(logEl){ logEl.innerHTML = ""; logEl.style.display = "block"; }
+
+  addLog("Chamando Edge Function do Supabase…", "info");
+
+  try {
+    const res = await fetch(EDGE_FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type":  "application/json",
+        "Authorization": `Bearer ${ANON_KEY}`
+      },
+      body: JSON.stringify({})
+    });
+
+    const data = await res.json();
+
+    // Exibe o log retornado pela Edge Function
+    if(data.log && Array.isArray(data.log)){
+      data.log.forEach(linha => {
+        const tipo = linha.startsWith("✅") ? "ok"
+                   : linha.startsWith("⚠️") ? "warn"
+                   : linha.startsWith("❌") ? "err"
+                   : "info";
+        addLog(linha, tipo);
+      });
+    }
+
+    if(!res.ok || !data.sucesso){
+      throw new Error(data.erro || `HTTP ${res.status}`);
+    }
+
+    if(data.atualizados > 0){
+      toast(`⚡ ${data.atualizados} resultado(s) sincronizado(s)!`);
+      await carregarJogos();
+      if(document.getElementById("admin").style.display !== "none") carregarJogosAdmin();
+    } else {
+      toast("ℹ️ Nenhum novo resultado para sincronizar.");
+    }
+
+  } catch(err){
+    addLog("❌ Erro: " + err.message, "err");
+    toast("❌ Erro no sync: " + err.message, 5000);
+    console.error(err);
+  } finally {
+    if(btnAdmin){ btnAdmin.disabled = false; btnAdmin.textContent = "⚡ Sincronizar Resultados Agora"; }
+    if(btnTopo){ btnTopo.classList.remove("loading"); btnTopo.textContent = "⚡ Sync API"; }
+  }
+}
+
+
+/* ─────────────────────────────────────────
+   IMPORTAR JOGOS DA FOOTBALL-DATA.ORG
+
+   Chama a Edge Function "importar-jogos", que busca todos os jogos
+   da Copa do Mundo na football-data.org e insere na tabela "jogos"
+   os que ainda não existem, já com o api_match_id preenchido.
+   Isso é o que permite o sync-resultados encontrar e atualizar
+   os placares depois.
+───────────────────────────────────────── */
+async function importarJogosAPI(){
+  // ── URL da Edge Function "importar-jogos" no Supabase ─────
+  const EDGE_FUNCTION_URL = "https://agyqhoqngtcowowjrjlj.supabase.co/functions/v1/importar-jogos";
+
+  const ANON_KEY = supabaseKey;
+
+  const btnAdmin = document.getElementById("btnImportarAdmin");
+  if(btnAdmin){ btnAdmin.disabled = true; btnAdmin.textContent = "⏳ Importando…"; }
+
+  const logEl = document.getElementById("importLog");
+  if(logEl){ logEl.innerHTML = ""; logEl.style.display = "block"; }
+
+  addLog("Chamando Edge Function do Supabase…", "info", "importLog");
+
+  try {
+    const res = await fetch(EDGE_FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type":  "application/json",
+        "Authorization": `Bearer ${ANON_KEY}`
+      },
+      body: JSON.stringify({})
+    });
+
+    const data = await res.json();
+
+    // Exibe o log retornado pela Edge Function
+    if(data.log && Array.isArray(data.log)){
+      data.log.forEach(linha => {
+        const tipo = linha.startsWith("✅") ? "ok"
+                   : linha.startsWith("⚠️") ? "warn"
+                   : linha.startsWith("❌") ? "err"
+                   : "info";
+        addLog(linha, tipo, "importLog");
+      });
+    }
+
+    if(!res.ok || !data.sucesso){
+      throw new Error(data.erro || `HTTP ${res.status}`);
+    }
+
+    if(data.importados > 0){
+      toast(`📥 ${data.importados} jogo(s) importado(s)!`);
+      await carregarJogos();
+      if(document.getElementById("admin").style.display !== "none") carregarJogosAdmin();
+    } else {
+      toast("ℹ️ Nenhum jogo novo para importar.");
+    }
+
+  } catch(err){
+    addLog("❌ Erro: " + err.message, "err", "importLog");
+    toast("❌ Erro ao importar: " + err.message, 5000);
+    console.error(err);
+  } finally {
+    if(btnAdmin){ btnAdmin.disabled = false; btnAdmin.textContent = "📥 Importar Jogos Agora"; }
+  }
+}
+</script>
+
+</body>
+</html>
