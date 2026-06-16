@@ -1553,12 +1553,25 @@ async function atualizarPontuacao(){
     const palpitesPessoa = palpites.filter(p => p.participante_id === participante.id);
 
     for(const palpite of palpitesPessoa){
-      const jogo = jogos.find(j => j.id === palpite.jogo_id);
-      if(!jogo) continue;
-      const rReal = Math.sign(jogo.gols_mandante - jogo.gols_visitante);
-      const rPal  = Math.sign(palpite.palpite_mandante - palpite.palpite_visitante);
-      if(rReal === rPal) pontos++;
+  const jogo = jogos.find(j => j.id === palpite.jogo_id);
+  if(!jogo) continue;
+
+  // Placar exato
+  if(
+    palpite.palpite_mandante === jogo.gols_mandante &&
+    palpite.palpite_visitante === jogo.gols_visitante
+  ){
+    pontos += 3;
+  }
+  else{
+    const rReal = Math.sign(jogo.gols_mandante - jogo.gols_visitante);
+    const rPal  = Math.sign(palpite.palpite_mandante - palpite.palpite_visitante);
+
+    if(rReal === rPal){
+      pontos += 1;
     }
+  }
+}
 
     await supabaseClient.from("participantes").update({ pontos }).eq("id", participante.id);
   }
