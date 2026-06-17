@@ -1578,7 +1578,6 @@ async function atualizarPontuacao(){
 }
 
 async function carregarRanking(){
-  await atualizarPontuacao();
 
   const { data } = await supabaseClient
     .from("participantes").select("*")
