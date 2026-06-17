@@ -1573,7 +1573,12 @@ async function atualizarPontuacao(){
   }
 }
 
-    await supabaseClient.from("participantes").update({ pontos }).eq("id", participante.id);
+    await supabaseClient
+  .from("participantes")
+  .update({
+    pontos: pontos + (participante.pontos_historicos || 0)
+  })
+  .eq("id", participante.id);;
   }
 }
 
